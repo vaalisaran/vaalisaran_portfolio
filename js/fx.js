@@ -55,21 +55,17 @@
   const pct = document.getElementById("ringPct");
   const circ = 2 * Math.PI * 18;
   function onScroll() {
+    const y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
     const max = document.documentElement.scrollHeight - innerHeight;
-    const p = max <= 0 ? 0 : Math.min(1, scrollY / max);
+    const p = max <= 0 ? 0 : Math.min(1, y / max);
     if (bar) bar.style.width = `${p * 100}%`;
     if (arc) arc.style.strokeDashoffset = String(circ * (1 - p));
     if (pct) pct.textContent = `${Math.round(p * 100)}%`;
-    document.getElementById("nav")?.classList.toggle("shut", scrollY > 80);
+    const mainNav = document.getElementById("nav");
+    if (mainNav) mainNav.classList.toggle("compact", y > 30);
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
-
-  document.getElementById("islandToggle")?.addEventListener("click", () => {
-    document.getElementById("nav")?.classList.toggle("shut");
-  });
-  const island = document.getElementById("nav");
-  island?.addEventListener("mouseenter", () => island.classList.remove("shut"));
 
   const clock = document.getElementById("localTime");
   function tickClock() {

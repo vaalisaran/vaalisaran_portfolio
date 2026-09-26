@@ -85,20 +85,16 @@
   );
   sections.forEach((s) => spy.observe(s));
 
-  let lastY = 0;
-  window.addEventListener(
-    "scroll",
-    () => {
-      nav.classList.toggle("compact", window.scrollY > 40);
-      const y = window.scrollY;
-      document.querySelectorAll("[data-speed]").forEach((layer) => {
-        const speed = Number(layer.dataset.speed);
-        layer.style.transform = `translate3d(0, ${y * speed}px, 0)`;
-      });
-      lastY = y;
-    },
-    { passive: true }
-  );
+  function checkNavScroll() {
+    const y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    if (nav) nav.classList.toggle("compact", y > 30);
+    document.querySelectorAll("[data-speed]").forEach((layer) => {
+      const speed = Number(layer.dataset.speed);
+      layer.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+    });
+  }
+  window.addEventListener("scroll", checkNavScroll, { passive: true });
+  checkNavScroll();
 
   const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
   const ring = { x: mouse.x, y: mouse.y };
@@ -161,20 +157,6 @@
     requestAnimationFrame(tick);
   }
   tick();
-
-  let deferredPrompt;
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.hidden = false;
-  });
-  installBtn.addEventListener("click", async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    installBtn.hidden = true;
-  });
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");
