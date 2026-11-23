@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#070714" />
-  <meta name="description" content="Saran S — Engineer Trainee (Software) at the Indian Institute of Astrophysics. SIH’23 Finalist, NSCET’24 Winner, Proxy’24 Finalist." />
+  <meta name="description" content="Saran S — Engineer Trainee (Software) at the Indian Institute of Astrophysics (VBO Kavalur). SIH’23 Finalist, NSCET’24 Winner, Proxy’24 Finalist. Agile full-stack and scientific software developer." />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>Saran S · Portfolio</title>
+  <title>Saran S · Software Developer &amp; Engineer Trainee</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
   <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/fx.css" />
   <script type="importmap">
@@ -24,17 +24,24 @@
   </script>
 </head>
 <body>
+  <!-- 2D Interactive Celestial Constellation Network -->
+  <canvas id="constellationCanvas" class="constellation-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Overlays & Grain -->
   <div class="film-grain" aria-hidden="true"></div>
   <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Circular Scroll Progress Indicator -->
   <svg class="progress-ring" id="progressRing" viewBox="0 0 46 46" aria-hidden="true">
     <circle cx="23" cy="23" r="18" fill="none" stroke="rgba(127,127,127,.25)" stroke-width="3"/>
     <circle id="ringArc" cx="23" cy="23" r="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="113" stroke-dashoffset="113"/>
     <text x="23" y="27" text-anchor="middle" id="ringPct">0%</text>
   </svg>
-  <div class="hover-preview" id="hoverPreview"></div>
 
+  <div class="hover-preview" id="hoverPreview"></div>
   <div class="page-wipe" aria-hidden="true"><span></span></div>
 
+  <!-- Skeleton Initial State -->
   <div class="skeleton" id="skeleton" aria-hidden="true">
     <div class="skel-nav"></div>
     <div class="skel-hero">
@@ -50,12 +57,14 @@
     </div>
   </div>
 
+  <!-- Interactive Dual Cursor & Particle Bubbles -->
   <div class="cursor" id="cursor" aria-hidden="true">
     <div class="cursor-ring"></div>
     <div class="cursor-dot"></div>
   </div>
   <div class="cursor-trails" id="trails" aria-hidden="true"></div>
 
+  <!-- Ambient Fluid Mesh Blobs -->
   <div class="mesh" aria-hidden="true">
     <span class="blob b1"></span>
     <span class="blob b2"></span>
@@ -64,6 +73,7 @@
     <span class="noise"></span>
   </div>
 
+  <!-- Floating Island Navigation Bar -->
   <header class="nav island" id="nav">
     <a class="logo magnetic" href="#home" data-page="home">
       <span class="logo-mark">S</span>
@@ -74,30 +84,29 @@
       <a class="magnetic" href="#about" data-page="about">About</a>
       <a class="magnetic" href="#work" data-page="work">Experience</a>
       <a class="magnetic" href="#projects" data-page="projects">Projects</a>
-      <a class="magnetic" href="gallery.html">Gallery ✨</a>
-      <a class="magnetic" href="#lab" data-page="lab">Lab</a>
       <a class="magnetic" href="#contact" data-page="contact">Contact</a>
     </nav>
     <div class="nav-actions">
-      <button class="theme-toggle magnetic icon-btn mute" id="soundToggle" aria-label="Toggle sound" type="button">♪</button>
-      <button class="theme-toggle magnetic" id="themeToggle" aria-label="Toggle theme" type="button">
+      <button class="theme-toggle magnetic icon-btn mute" id="soundToggle" aria-label="Toggle sound feedback" type="button">♪</button>
+      <button class="theme-toggle magnetic" id="themeToggle" aria-label="Toggle dark/light theme" type="button">
         <span class="sun"></span>
         <span class="moon"></span>
       </button>
-      <button class="menu-btn magnetic" id="menuBtn" aria-label="Open menu" type="button">
+      <button class="menu-btn magnetic" id="menuBtn" aria-label="Open navigation menu" type="button">
         <span></span><span></span>
       </button>
     </div>
   </header>
 
   <main>
+    <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="parallax-layer stars" data-speed="0.15"></div>
       <div class="hero-copy">
-        <p class="eyebrow reveal">Hi there !</p>
+        <p class="eyebrow reveal"><span>✦</span> Scientific Computing &amp; Agile Engineering</p>
         <div class="avail glass reveal">
-          <span class="pulse"></span>
-          <span>Open to full-time roles</span>
+          <span class="pulse green"></span>
+          <span>Open to full-time engineering roles</span>
           <span id="localTime">--:-- IST</span>
         </div>
         <h1 class="giant" id="giantType">
@@ -105,19 +114,77 @@
           <span class="name" data-text="SARAN S">SARAN S</span>
         </h1>
         <p class="tagline reveal">I am a <span id="typeTarget"></span><span class="caret"></span></p>
-        <p class="role-line reveal">SIH’23 Finalist · Fresher · Aspiring Software Developer</p>
+        <p class="role-line reveal">SIH’23 Finalist · NSCET’24 Winner · Aspiring Software Engineer</p>
+
+        <!-- Observatory Telemetry Status Strip -->
+        <div class="observatory-hud glass reveal" data-delay="50">
+          <div class="hud-item">
+            <span class="hud-label">Observatory Post</span>
+            <span class="hud-val">IIA · VBO, Kavalur</span>
+          </div>
+          <div class="hud-divider"></div>
+          <div class="hud-item">
+            <span class="hud-label">Flagship Rig</span>
+            <span class="hud-val">2.34m VBT Telescope</span>
+          </div>
+          <div class="hud-divider"></div>
+          <div class="hud-item">
+            <span class="hud-label">Coordinates</span>
+            <span class="hud-val">12.57° N, 78.82° E · 725m</span>
+          </div>
+          <div class="hud-divider"></div>
+          <div class="hud-item">
+            <span class="hud-label">Observatory Clock</span>
+            <span class="hud-val" id="hudClocks">--:-- IST · --:-- UTC</span>
+          </div>
+          <div class="hud-divider"></div>
+          <div class="hud-item">
+            <span class="hud-label">Telemetry Status</span>
+            <span class="hud-val live-pill"><span class="pulse green"></span> Active Science Node</span>
+          </div>
+        </div>
+
         <p class="lede reveal">
-          Innovative software developer with experience in <strong>agile scalable solutions</strong>,
-          troubleshooting, and full-stack development. Finalist in <em>SIH’23</em> and <em>Proxy’24</em>,
-          recognized for technical problem-solving and leadership. Proficient in Python, SQL, and Cloud,
-          with hands-on Agile and API development. Passionate about efficient, data-driven solutions.
+          Innovative software developer with experience in <strong>agile, scalable solutions</strong>,
+          scientific troubleshooting, and full-stack architecture. Finalist in <em>SIH’23</em> and <em>Proxy’24</em>,
+          winner of <em>NSCET’24</em>. Currently on-site as Engineer Trainee (Software) at the <strong>Indian Institute of Astrophysics (VBO Kavalur)</strong>,
+          building production platforms, telemetry GUIs, and data-driven systems.
         </p>
+
         <div class="hero-cta reveal">
           <a class="btn clay magnetic" href="#contact" data-sound="whoosh">Let’s talk</a>
           <button class="btn ghost magnetic" id="resumeView" type="button" data-sound="click">View resume</button>
           <a class="btn ghost magnetic" href="assets/Saran_py_Developer.pdf" download data-sound="click">Download CV (PDF)</a>
         </div>
+
+        <div class="hero-social-strip reveal" data-delay="80">
+          <a class="hero-social-pill glass spot magnetic" href="https://github.com/vaalisaran" target="_blank" rel="noopener noreferrer" aria-label="GitHub @vaalisaran">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a class="hero-social-pill glass spot magnetic" href="https://www.linkedin.com/in/vaalisaran/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn @vaalisaran">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.53 1.53 0 0 0 1.54-1.54 1.54 1.54 0 1 0-1.54 1.54m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+          <a class="hero-social-pill glass spot magnetic" href="https://www.instagram.com/vaalisaran/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @vaalisaran">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span>Instagram</span>
+          </a>
+          <a class="hero-social-pill glass spot magnetic" href="https://x.com/vaalisaran" target="_blank" rel="noopener noreferrer" aria-label="Twitter X @vaalisaran">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            <span>Twitter / X</span>
+          </a>
+        </div>
       </div>
+
       <div class="hero-stage">
         <canvas id="gl"></canvas>
         <div class="glass float-card">
@@ -126,23 +193,25 @@
         </div>
         <div class="glass float-card c2">
           <span>NSCET ’24</span>
-          <strong>Hackathon Winner</strong>
+          <strong>Hackathon 1st Winner</strong>
         </div>
-        <p class="playground-hint">Drag to orbit 3D · tilt on mobile</p>
+        <p class="playground-hint">Drag to orbit 3D · double-click color · tilt phone</p>
       </div>
     </section>
 
+    <!-- Infinite Smooth Marquee -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
         <span>IIA Vainu Bappu Observatory (VBO), Kavalur</span><span>Python</span><span>Django</span><span>FastAPI</span><span>SQL</span>
-        <span>SIH ’23 Finalist</span><span>NSCET ’24 Winner</span><span>Proxy ’24</span>
-        <span>Machine Learning</span><span>Docker</span><span>Agile</span>
+        <span>SIH ’23 Finalist</span><span>NSCET ’24 Winner</span><span>Proxy ’24 Finalist</span>
+        <span>Machine Learning</span><span>Docker</span><span>Agile SDLC</span>
         <span>IIA Vainu Bappu Observatory (VBO), Kavalur</span><span>Python</span><span>Django</span><span>FastAPI</span><span>SQL</span>
-        <span>SIH ’23 Finalist</span><span>NSCET ’24 Winner</span><span>Proxy ’24</span>
-        <span>Machine Learning</span><span>Docker</span><span>Agile</span>
+        <span>SIH ’23 Finalist</span><span>NSCET ’24 Winner</span><span>Proxy ’24 Finalist</span>
+        <span>Machine Learning</span><span>Docker</span><span>Agile SDLC</span>
       </div>
     </div>
 
+    <!-- Scrollytelling Story Section -->
     <section class="section" id="story">
       <div class="section-head reveal">
         <p class="eyebrow">Scrollytelling Experience</p>
@@ -150,8 +219,11 @@
       </div>
       <div class="story">
         <div class="story-sticky glass spot" id="storyScene">
-          <p class="eyebrow" id="storyKicker">Chapter 01</p>
-          <p class="story-scene" id="storyTitle">Theni</p>
+          <div class="story-badge-row">
+            <span class="badge" id="storyKicker">Chapter 01</span>
+            <span class="story-counter" id="storyStepCounter">1 / 6</span>
+          </div>
+          <h3 class="story-scene" id="storyTitle">Theni</h3>
           <p id="storyBody">School first in SSLC. A collector’s prize. The habit of finishing what I start.</p>
           <div class="metrics" id="storyMetrics"></div>
         </div>
@@ -195,12 +267,20 @@
       </div>
     </section>
 
+    <!-- Horizontal Observatory & Core Tooling Strip -->
     <div class="section">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
-        <h3 class="subhead reveal" style="margin:0">Skills &amp; Observatory Tooling Strip</h3>
-        <span style="font-size:0.82rem;color:var(--cyan);letter-spacing:0.04em">← Drag or scroll to explore 22 observatory &amp; engineering cards →</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+        <div>
+          <p class="eyebrow" style="margin-bottom:4px">Technical Breadth</p>
+          <h3 class="subhead reveal" style="margin:0">Skills &amp; Observatory Tooling Strip</h3>
+        </div>
+        <div class="h-scroll-controls">
+          <button class="h-scroll-arrow" id="hScrollLeft" aria-label="Scroll left" type="button">‹</button>
+          <button class="h-scroll-arrow" id="hScrollRight" aria-label="Scroll right" type="button">›</button>
+          <span class="h-scroll-hint">22 interactive cards · scroll or click</span>
+        </div>
       </div>
-      <div class="h-scroll">
+      <div class="h-scroll" id="hScrollContainer">
         <article class="h-card glass spot">
           <span class="badge">Core Language</span>
           <h3>Python &amp; REST APIs</h3>
@@ -335,6 +415,7 @@
       </div>
     </div>
 
+    <!-- About Section with Bento Grid -->
     <section class="section" id="about">
       <div class="section-head reveal">
         <p class="eyebrow">About me</p>
@@ -343,7 +424,7 @@
       <p class="about-blurb reveal">
         Innovative software developer with experience in <strong>agile, scalable solutions</strong>,
         troubleshooting, and full-stack development. Finalist in <em>SIH’23</em> and <em>Proxy’24</em>,
-        recognized for technical problem-solving and leadership. Proficient in Python, SQL, and Cloud,
+        winner of <em>NSCET’24</em>. Proficient in Python, SQL, and Cloud,
         with hands-on Agile and API development. Currently Engineer Trainee (Software) at the
         <strong>Indian Institute of Astrophysics — Vainu Bappu Observatory (VBO), Kavalur</strong> (from 21 April 2026),
         designing efficient, data-driven systems for scientific and production environments.
@@ -367,38 +448,39 @@
             <li><span>CGPA</span> 8.1</li>
             <li><span>Languages</span> English, Tamil</li>
           </ul>
-          <a class="btn slim magnetic" href="assets/Saran_py_Developer.pdf" download>Download CV (PDF)</a>
+          <a class="btn slim magnetic" href="assets/Saran_py_Developer.pdf" download style="margin-top:14px">Download CV (PDF)</a>
         </article>
 
         <article class="tile neu reveal" data-delay="80">
-          <p class="stat">4+</p>
+          <p class="stat" data-target="4" data-suffix="+">4+</p>
           <h3>Awards</h3>
           <p>NSCET’24 winner, SSLC school 1st, Spica cash prize, GUVI Webkata runner-up.</p>
         </article>
 
         <article class="tile clay-card reveal" data-delay="120">
-          <p class="stat">16</p>
+          <p class="stat" data-target="16" data-suffix="+">16+</p>
           <h3>Public GitHub projects</h3>
           <p>Observatory systems, CV/ML pipelines, Django products, and freelance web apps on github.com/vaalisaran.</p>
         </article>
 
         <article class="tile glass accent-tile reveal" data-delay="160">
-          <p class="stat">3</p>
+          <p class="stat" data-target="3" data-suffix="">3</p>
           <h3>National hackathons</h3>
           <p>SIH’23 Finalist · Proxy’24 Finalist (800+ teams) · NSCET’24 Winner.</p>
         </article>
 
         <article class="tile glass wide reveal" data-delay="200">
-          <h3>Interests</h3>
+          <h3>Interests &amp; Pursuits</h3>
           <div class="chips">
             <span>Machine Learning</span><span>Artificial Intelligence</span>
-            <span>Hackathons</span><span>Tech Blogging</span>
+            <span>Hackathons</span><span>Astronomical Telemetry</span><span>Tech Blogging</span>
             <span>Reading</span><span>Podcasts</span><span>Music</span>
           </div>
         </article>
       </div>
     </section>
 
+    <!-- Experience Section -->
     <section class="section" id="work">
       <div class="section-head reveal">
         <p class="eyebrow">Experience</p>
@@ -420,7 +502,7 @@
           </ul>
         </article>
 
-        <article class="job glass reveal">
+        <article class="job glass reveal spot">
           <div class="job-top">
             <span class="badge">On-site · Outsourced</span>
             <time>June 2025</time>
@@ -433,7 +515,7 @@
           </ul>
         </article>
 
-        <article class="job glass reveal">
+        <article class="job glass reveal spot">
           <div class="job-top">
             <span class="badge">Internship · On-site</span>
             <time>July 2024 – July 2024</time>
@@ -484,25 +566,25 @@
 
       <h3 class="subhead reveal">Education</h3>
       <div class="timeline">
-        <article class="time-card glass reveal">
+        <article class="time-card glass reveal spot">
           <time>Sep 2021 – May 2025</time>
           <h3>B.E. Computer Science Engineering</h3>
           <p>Honors: Business Data Analysis · CGPA 8.1</p>
           <p>Nadar Saraswathi College of Engineering and Technology, Theni</p>
         </article>
-        <article class="time-card clay-card reveal">
+        <article class="time-card clay-card reveal spot">
           <time>Sep 2019 – Mar 2020</time>
           <h3>Diploma in Computer Application</h3>
           <p>Percentage: 90%</p>
           <p>Computer Software College, Periyakulam, Theni</p>
         </article>
-        <article class="time-card glass reveal">
+        <article class="time-card glass reveal spot">
           <time>Jun 2018 – Mar 2019</time>
           <h3>HSC (12th) &amp; SSLC (10th)</h3>
           <p>HSC 84.6% · SSLC 88.6%</p>
           <p>Victoria Memorial Government Boys Higher Secondary School, Theni</p>
         </article>
-        <article class="time-card neu reveal">
+        <article class="time-card neu reveal spot">
           <time>School first</time>
           <h3>SSLC rank award</h3>
           <p>₹10,000 cash prize from the Theni Collector for securing school 1st in SSLC.</p>
@@ -510,6 +592,7 @@
       </div>
     </section>
 
+    <!-- Case Studies / Projects Section -->
     <section class="section" id="projects">
       <div class="section-head reveal">
         <p class="eyebrow">Case studies</p>
@@ -522,6 +605,7 @@
         <button class="chip-btn" data-filter="hackathon" type="button">Hackathon</button>
         <button class="chip-btn" data-filter="oss" type="button">Open source</button>
       </div>
+
       <div class="gallery" id="gallery">
         <article class="case glass spot show" data-cats="ai oss" data-preview="IoT Anomaly Detection · Isolation Forest & LSTM">
           <span class="badge">Machine Learning / IoT</span>
@@ -529,13 +613,14 @@
           <div class="metrics">
             <div class="metric"><b>LSTM</b><span>Autoencoder</span></div>
             <div class="metric"><b>Isolation</b><span>Forest</span></div>
-            <div class="metric"><b>0%</b><span>Unplanned Downtime</span></div>
+            <div class="metric"><b>0%</b><span>Downtime</span></div>
           </div>
           <p><strong>Problem</strong> Industrial IoT sensors generate massive streams where equipment failures go unnoticed until breakdown.</p>
           <p><strong>Solution</strong> End-to-end ML pipeline combining Isolation Forest and LSTM Autoencoder neural networks to detect micro-anomalies.</p>
           <p><strong>Impact</strong> Enables predictive maintenance, equipment fault warnings, and actionable industrial telemetry insights.</p>
           <div class="stack"><span>Python</span><span>TensorFlow / Keras</span><span>Scikit-Learn</span><span>Pandas</span><span>NumPy</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="iot-anomaly" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/Time-Series-Anomaly-Detection-for-IoT-Sensor-Data" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -553,6 +638,7 @@
           <p><strong>Impact</strong> Led team to Smart India Hackathon 2023 Finals at Nagpur (Ministry of Ayush).</p>
           <div class="stack"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Scalable API</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="tablet-id" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/Tablet-Identification-System" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -570,6 +656,7 @@
           <p><strong>Impact</strong> Secured 1st prize at NSCET’24 Hackathon outperforming 80+ competing teams.</p>
           <div class="stack"><span>Django</span><span>Python</span><span>OpenCV</span><span>AI Chatbot</span><span>Biometrics</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="elearning-anti-spoof" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/Inventory-Management-System-Advanced" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -587,6 +674,7 @@
           <p><strong>Impact</strong> Deployed web utility for astronomers and public stargazers at KSO.</p>
           <div class="stack"><span>Python</span><span>JavaScript</span><span>Astro Algorithms</span><span>HTML5</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="ksonightsky" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/ksonightsky" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -604,6 +692,7 @@
           <p><strong>Impact</strong> Streamlined radio data analysis for IIA / Kodaikanal Solar Observatory research workflows.</p>
           <div class="stack"><span>Python</span><span>Matplotlib</span><span>Tkinter / PyQt</span><span>NumPy</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="radio-data-gui" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/Kodaikanal-Radio-Data-GUI" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -620,6 +709,7 @@
           <p><strong>Impact</strong> Modernized institutional workflows and task logging for central observatory staff.</p>
           <div class="stack"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Python Backend</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="iia-management" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/IIA-Observatory-Management-System" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -636,6 +726,7 @@
           <p><strong>Impact</strong> Increased clinic appointment efficiency and digital visibility.</p>
           <div class="stack"><span>HTML5 / CSS3</span><span>JavaScript</span><span>Responsive UI</span><span>Web Forms</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="physio-booking" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/Saipulla-physiotherapy" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -652,6 +743,7 @@
           <p><strong>Impact</strong> Provided complete web infrastructure for government school administration.</p>
           <div class="stack"><span>Django</span><span>Python</span><span>HTML5 / CSS3</span><span>Deployment</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="vmgbhss-portal" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/VMGBHSS---Website" target="_blank" rel="noopener">GitHub Repo</a>
             <a class="icon-btn glass" href="https://vmgbhss.pythonanywhere.com/" target="_blank" rel="noopener">Live Portal</a>
           </div>
@@ -669,6 +761,7 @@
           <p><strong>Impact</strong> Open-source showcase of machine learning architecture mastery.</p>
           <div class="stack"><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>Scikit-Learn</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="ai-model-suite" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/Vaali-Saran-AI" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -685,6 +778,7 @@
           <p><strong>Impact</strong> Used for solar activity monitoring and astronomical data logging.</p>
           <div class="stack"><span>HTML5</span><span>JavaScript</span><span>Python Analysis</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="sun-antenna" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/Antenna-Observation-of-Sun" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -701,6 +795,7 @@
           <p><strong>Impact</strong> Demonstrates efficient full-stack web application development.</p>
           <div class="stack"><span>Python</span><span>HTML / CSS</span><span>JavaScript</span><span>SQL</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="vbo-food" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran/vbo_food_app" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
@@ -718,104 +813,57 @@
           <p><strong>Impact</strong> Internship showcase project demonstrating product design and full-stack engineering.</p>
           <div class="stack"><span>Full Stack</span><span>WebSockets</span><span>Maps API</span><span>AI System</span></div>
           <div class="links-row">
+            <button class="icon-btn glass inspect-btn" data-project="travel-crew" type="button">⚡ Architecture Specs</button>
             <a class="icon-btn glass" href="https://github.com/vaalisaran" target="_blank" rel="noopener">GitHub Profile</a>
           </div>
         </article>
       </div>
 
-      <h3 class="subhead reveal">Skills</h3>
-      <div class="radar-wrap reveal">
+      <!-- Skills Matrix & Radar Section -->
+      <h3 class="subhead reveal">Engineering proficiency</h3>
+      <div class="radar-wrap glass reveal spot">
         <canvas id="radar" width="280" height="280"></canvas>
         <div class="bars" id="skillBars">
-          <div class="bar-row"><div class="label"><span>Python</span><span>4 yrs</span></div><div class="track"><div class="fill" data-w="92"></div></div></div>
-          <div class="bar-row"><div class="label"><span>Django / FastAPI</span><span>3 yrs</span></div><div class="track"><div class="fill" data-w="86"></div></div></div>
-          <div class="bar-row"><div class="label"><span>SQL / NoSQL</span><span>3 yrs</span></div><div class="track"><div class="fill" data-w="80"></div></div></div>
-          <div class="bar-row"><div class="label"><span>JavaScript</span><span>3 yrs</span></div><div class="track"><div class="fill" data-w="74"></div></div></div>
-          <div class="bar-row"><div class="label"><span>TensorFlow / CV</span><span>2 yrs</span></div><div class="track"><div class="fill" data-w="70"></div></div></div>
-          <div class="bar-row"><div class="label"><span>Docker / DevOps</span><span>2 yrs</span></div><div class="track"><div class="fill" data-w="68"></div></div></div>
+          <div class="bar-row"><div class="label"><span>Python &amp; Async Systems</span><span>94%</span></div><div class="track"><div class="fill" data-w="94"></div></div></div>
+          <div class="bar-row"><div class="label"><span>Django &amp; FastAPI Microservices</span><span>88%</span></div><div class="track"><div class="fill" data-w="88"></div></div></div>
+          <div class="bar-row"><div class="label"><span>SQL &amp; Data Optimization</span><span>84%</span></div><div class="track"><div class="fill" data-w="84"></div></div></div>
+          <div class="bar-row"><div class="label"><span>JavaScript &amp; Interactive UI</span><span>78%</span></div><div class="track"><div class="fill" data-w="78"></div></div></div>
+          <div class="bar-row"><div class="label"><span>TensorFlow &amp; Computer Vision</span><span>75%</span></div><div class="track"><div class="fill" data-w="75"></div></div></div>
+          <div class="bar-row"><div class="label"><span>Docker, Linux &amp; CI/CD</span><span>72%</span></div><div class="track"><div class="fill" data-w="72"></div></div></div>
         </div>
       </div>
+
       <div class="skill-grid">
-        <article class="skill glass reveal"><h3>Languages</h3><p>Python, Java, JavaScript, C</p></article>
-        <article class="skill glass reveal"><h3>Frameworks</h3><p>Django, Flask, FastAPI, React (Basics), Pandas, NumPy, TensorFlow</p></article>
-        <article class="skill glass reveal"><h3>Data</h3><p>SQL (MySQL), NoSQL (MongoDB, Redis)</p></article>
-        <article class="skill glass reveal"><h3>Web</h3><p>HTML / CSS, JS, jQuery, RESTful APIs</p></article>
-        <article class="skill glass reveal"><h3>Tools</h3><p>Docker, Git, GitHub, Jira, Postman, n8n, Linux Debian</p></article>
-        <article class="skill glass reveal"><h3>Concepts</h3><p>Agile, OOP, DSA, Cloud technologies</p></article>
+        <article class="skill glass reveal spot"><h3>Languages</h3><p>Python, Java, JavaScript, C, Bash Shell</p></article>
+        <article class="skill glass reveal spot"><h3>Frameworks</h3><p>Django, Flask, FastAPI, React (Basics), Pandas, NumPy, TensorFlow, OpenCV</p></article>
+        <article class="skill glass reveal spot"><h3>Data &amp; Persistence</h3><p>MySQL, PostgreSQL, MongoDB, Redis, FITS Astro formats</p></article>
+        <article class="skill glass reveal spot"><h3>Web &amp; APIs</h3><p>HTML5, Modern CSS, WebSockets, RESTful APIs, WebRTC</p></article>
+        <article class="skill glass reveal spot"><h3>DevOps &amp; Tools</h3><p>Docker, Git, GitHub, Jira, Postman, Linux Debian, n8n</p></article>
+        <article class="skill glass reveal spot"><h3>Scientific &amp; Agile</h3><p>Agile Scrum, Astronomical Ephemeris, DSP Telemetry, OOP, DSA</p></article>
       </div>
 
+      <!-- Honors & Achievements -->
       <h3 class="subhead reveal">Achievements</h3>
       <div class="certs">
-        <article class="cert clay-card reveal"><h3>SIH’23 Finalist</h3><p>Smart India Hackathon 2023 at Nagpur — Ministry of Ayush.</p></article>
-        <article class="cert glass reveal"><h3>NSCET’24 Winner</h3><p>1st prize, E-Learning Platform, 80+ teams / 480+ participants.</p></article>
-        <article class="cert neu reveal"><h3>Proxy Hackathon Finalist</h3><p>Final round among 800+ teams from across India.</p></article>
-        <article class="cert glass reveal"><h3>SSLC School 1st</h3><p>₹10,000 prize from the Theni Collector.</p></article>
-        <article class="cert clay-card reveal"><h3>GUVI Webkata-2</h3><p>2nd runner-up, 40-hour frontend Tech Marathon.</p></article>
-        <article class="cert glass reveal"><h3>Spica Tech</h3><p>Cash prize for completing 96% of assigned work.</p></article>
+        <article class="cert clay-card reveal spot"><h3>SIH’23 Finalist</h3><p>Smart India Hackathon 2023 at Nagpur — Ministry of Ayush.</p></article>
+        <article class="cert glass reveal spot"><h3>NSCET’24 Winner</h3><p>1st prize, E-Learning Platform, 80+ teams / 480+ participants.</p></article>
+        <article class="cert neu reveal spot"><h3>Proxy Hackathon Finalist</h3><p>Final round among 800+ teams from across India.</p></article>
+        <article class="cert glass reveal spot"><h3>SSLC School 1st</h3><p>₹10,000 prize from the Theni Collector for securing school 1st.</p></article>
+        <article class="cert clay-card reveal spot"><h3>GUVI Webkata-2</h3><p>2nd runner-up, 40-hour frontend Tech Marathon.</p></article>
+        <article class="cert glass reveal spot"><h3>Spica Tech Prize</h3><p>Cash prize for completing 96% of assigned work.</p></article>
       </div>
 
+      <!-- Certifications -->
       <h3 class="subhead reveal">Certifications</h3>
       <div class="certs">
-        <article class="cert glass reveal"><h3>DevOps</h3><p>GUVI</p></article>
-        <article class="cert glass reveal"><h3>Python</h3><p>CSC · GUVI</p></article>
-        <article class="cert neu reveal"><h3>AI Expert</h3><p>Udemy</p></article>
-        <article class="cert glass reveal"><h3>Networking</h3><p>Cisco</p></article>
+        <article class="cert glass reveal spot"><h3>DevOps Certification</h3><p>GUVI Geek Networks</p></article>
+        <article class="cert glass reveal spot"><h3>Python Programming</h3><p>Computer Software College (CSC) · GUVI</p></article>
+        <article class="cert neu reveal spot"><h3>AI &amp; Deep Learning Expert</h3><p>Udemy Academy</p></article>
+        <article class="cert glass reveal spot"><h3>Networking Fundamentals</h3><p>Cisco Networking Academy</p></article>
       </div>
     </section>
 
-    <section class="section" id="lab">
-      <div class="section-head reveal">
-        <p class="eyebrow">Lab</p>
-        <h2>Live GitHub, proof <em>&amp; a guestbook.</em></h2>
-      </div>
-      <div class="gh-grid">
-        <article class="glass spot" style="padding:22px;border-radius:24px">
-          <h3>Contribution heatmap</h3>
-          <p id="ghMeta" class="about-blurb">Loading GitHub…</p>
-          <div class="heat" id="heat"></div>
-        </article>
-        <article class="glass spot" style="padding:22px;border-radius:24px">
-          <h3>Pinned-style repos</h3>
-          <div class="repo-list" id="repoList"></div>
-        </article>
-      </div>
-
-      <h3 class="subhead reveal">Recognition</h3>
-      <div class="carousel" id="quotes">
-        <article class="quote glass">
-          <p>“Finalist of Smart India Hackathon 2023 at Nagpur — Ministry of Ayush.”</p>
-          <footer>SIH ’23 · National finals</footer>
-        </article>
-        <article class="quote glass">
-          <p>“Won 1st prize for the E-Learning Platform, outperforming 80+ teams (480+ participants).”</p>
-          <footer>NSCET ’24 · Hackathon winner</footer>
-        </article>
-        <article class="quote glass">
-          <p>“Reached the final round among 800+ teams from across India.”</p>
-          <footer>Proxy Hackathon · Finalist</footer>
-        </article>
-        <article class="quote glass">
-          <p>“Cash prize for outstanding performance — 96% of assigned tasks completed.”</p>
-          <footer>Spica Tech · Theni</footer>
-        </article>
-      </div>
-      <div class="hero-cta" style="margin-top:12px">
-        <button class="btn ghost magnetic" id="quotePrev" type="button">Prev</button>
-        <button class="btn ghost magnetic" id="quoteNext" type="button">Next</button>
-        <a class="btn ghost magnetic" href="https://www.linkedin.com/in/vaalisaran/" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-
-      <h3 class="subhead reveal">Guestbook · <span id="viewCount">–</span> local reads</h3>
-      <form class="contact-form glass" id="guestForm" style="grid-template-columns:1fr auto;padding:20px;border-radius:24px">
-        <label class="full">
-          <span>Leave a note</span>
-          <input class="field" name="note" maxlength="140" required placeholder="Nice work — hiring / collab / hi" />
-        </label>
-        <button class="btn clay magnetic" type="submit">Sign</button>
-      </form>
-      <div class="guest-list" id="guestList"></div>
-    </section>
-
+    <!-- Contact Section -->
     <section class="section contact" id="contact">
       <div class="section-head reveal">
         <p class="eyebrow">Contact me</p>
@@ -826,53 +874,107 @@
           <h3>Contact info</h3>
           <p>
             <button class="icon-btn glass magnetic" id="copyEmail" type="button">Copy email</button>
-            <span class="copied" id="copied" hidden>Copied!</span>
+            <span class="copied" id="copied" hidden>Copied to clipboard!</span>
           </p>
           <a class="magnetic" href="mailto:saran152004s@gmail.com">saran152004s@gmail.com</a>
           <a class="magnetic" href="tel:+917810061425">+91 78100 61425</a>
-          <p>Theni, Tamil Nadu, India</p>
-          <div class="dock">
-            <a class="glass spot" href="https://github.com/vaalisaran" target="_blank" rel="noopener">
-              GitHub
-              <span class="tip glass" id="ghTip">Followers loading…</span>
+          <p>Theni / Kavalur, Tamil Nadu, India</p>
+
+          <h3 style="margin-top:20px">Connect &amp; Follow</h3>
+          <div class="social-dock">
+            <a class="social-btn glass spot magnetic" href="https://github.com/vaalisaran" target="_blank" rel="noopener noreferrer" aria-label="GitHub @vaalisaran">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              <div class="social-info">
+                <span class="social-name">GitHub</span>
+                <span class="social-handle">@vaalisaran</span>
+              </div>
             </a>
-            <a class="glass spot" href="https://www.linkedin.com/in/vaalisaran/" target="_blank" rel="noopener">
-              LinkedIn
-              <span class="tip glass">vaalisaran · Theni</span>
+            <a class="social-btn glass spot magnetic" href="https://www.linkedin.com/in/vaalisaran/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn @vaalisaran">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.53 1.53 0 0 0 1.54-1.54 1.54 1.54 0 1 0-1.54 1.54m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+              </svg>
+              <div class="social-info">
+                <span class="social-name">LinkedIn</span>
+                <span class="social-handle">@vaalisaran</span>
+              </div>
+            </a>
+            <a class="social-btn glass spot magnetic" href="https://www.instagram.com/vaalisaran/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @vaalisaran">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              <div class="social-info">
+                <span class="social-name">Instagram</span>
+                <span class="social-handle">@vaalisaran</span>
+              </div>
+            </a>
+            <a class="social-btn glass spot magnetic" href="https://x.com/vaalisaran" target="_blank" rel="noopener noreferrer" aria-label="Twitter X @vaalisaran">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              <div class="social-info">
+                <span class="social-name">Twitter / X</span>
+                <span class="social-handle">@vaalisaran</span>
+              </div>
             </a>
           </div>
-          <h3 style="margin-top:22px">Book 15 minutes</h3>
-          <p class="about-blurb">Pick a slot — it opens a calendar email. Swap in your Cal.com URL anytime.</p>
+
+          <h3 style="margin-top:26px">Book 15 minutes</h3>
+          <p class="about-blurb" style="font-size:0.9rem">Pick a slot — it opens a pre-composed calendar intro email.</p>
           <div class="slots" id="slots"></div>
         </aside>
         <form class="contact-form glass reveal" id="contactForm" novalidate>
           <label>
-            <span>Name</span>
-            <input class="field" name="name" required minlength="2" placeholder="Your name" />
+            <span>Your Name</span>
+            <input class="field" name="name" required minlength="2" placeholder="e.g. Alex Smith" />
             <span class="err" data-for="name"></span>
           </label>
           <label>
-            <span>Email</span>
-            <input class="field" type="email" name="email" required placeholder="you@email.com" />
+            <span>Your Email</span>
+            <input class="field" type="email" name="email" required placeholder="you@company.com" />
             <span class="err" data-for="email"></span>
           </label>
           <label class="full">
-            <span>Message</span>
-            <textarea class="field" name="message" rows="3" required minlength="8" placeholder="Tell me about the role or project"></textarea>
+            <span>Message / Project Outline</span>
+            <textarea class="field" name="message" rows="3" required minlength="8" placeholder="Tell me about your software project or engineering role..."></textarea>
             <span class="err" data-for="message"></span>
           </label>
-          <button class="btn clay magnetic" type="submit">Send message</button>
-          <p class="form-note" id="formNote" hidden>Message ready — your mail app will open.</p>
-          <div class="ok-state" id="formOk">Thanks — I’ll get back to you.</div>
+          <button class="btn clay magnetic" type="submit">Send Message</button>
+          <p class="form-note" id="formNote" hidden>Message prepared — your email client will launch.</p>
+          <div class="ok-state" id="formOk">Message ready. Looking forward to speaking!</div>
         </form>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="foot">
-    <p>© <span id="year"></span> Saran S · Press <kbd>Ctrl</kbd>+<kbd>K</kbd> · Konami for terminal</p>
-    <div class="accent-row" title="Accent picker">
-      <button class="swatch" data-accent="cyan" style="background:#22d3ee" type="button" aria-label="Cyan"></button>
+    <p>© <span id="year"></span> Saran S · Press <kbd>Ctrl</kbd>+<kbd>K</kbd> for Command Palette · Konami code for hacker console</p>
+    <div class="footer-socials" aria-label="Social profiles">
+      <a class="footer-social-btn glass spot magnetic" href="https://github.com/vaalisaran" target="_blank" rel="noopener noreferrer" aria-label="GitHub @vaalisaran">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+      </a>
+      <a class="footer-social-btn glass spot magnetic" href="https://www.linkedin.com/in/vaalisaran/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn @vaalisaran">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.53 1.53 0 0 0 1.54-1.54 1.54 1.54 0 1 0-1.54 1.54m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+        </svg>
+      </a>
+      <a class="footer-social-btn glass spot magnetic" href="https://www.instagram.com/vaalisaran/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @vaalisaran">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+      <a class="footer-social-btn glass spot magnetic" href="https://x.com/vaalisaran" target="_blank" rel="noopener noreferrer" aria-label="Twitter X @vaalisaran">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+    </div>
+    <div class="accent-row" title="Accent theme picker">
+      <button class="swatch" data-accent="cyan" style="background:#22d3ee" type="button" aria-label="Cyber Cyan"></button>
       <button class="swatch" data-accent="violet" style="background:#a78bfa" type="button" aria-label="Violet"></button>
       <button class="swatch" data-accent="emerald" style="background:#34d399" type="button" aria-label="Emerald"></button>
       <button class="swatch" data-accent="amber" style="background:#fbbf24" type="button" aria-label="Amber"></button>
@@ -880,28 +982,33 @@
     </div>
   </footer>
 
-  <nav class="thumb-nav glass" aria-label="Mobile">
+  <!-- Mobile Bottom Floating Thumb Navigation Dock -->
+  <nav class="thumb-nav glass" aria-label="Mobile Bottom Navigation">
     <a href="#home" data-page="home">Home</a>
+    <a href="#about" data-page="about">About</a>
     <a href="#work" data-page="work">Work</a>
     <a href="#projects" data-page="projects">Build</a>
-    <a href="gallery.html">Gallery ✨</a>
     <a href="#contact" data-page="contact">Ping</a>
   </nav>
-  <a class="fab magnetic" href="#contact" aria-label="Contact">@</a>
 
+  <!-- Floating Quick Action Button -->
+  <a class="fab magnetic" href="#contact" aria-label="Contact quick jump">@</a>
+
+  <!-- Command Palette Modal (Ctrl+K) -->
   <div class="cmdk" id="cmdk">
     <div class="cmdk-box glass">
-      <input id="cmdkInput" placeholder="Jump to… projects, skills, resume" />
+      <input id="cmdkInput" placeholder="Jump to… projects, skills, resume, theme" />
       <ul id="cmdkList"></ul>
     </div>
   </div>
 
+  <!-- Resume Preview Modal -->
   <div class="modal" id="resumeModal">
     <div class="modal-card glass">
       <div class="modal-head">
-        <strong>Resume preview</strong>
+        <strong>Resume preview · Saran S</strong>
         <span>
-          <a class="icon-btn" href="assets/cv.html" download>Download</a>
+          <a class="icon-btn" href="assets/Saran_py_Developer.pdf" download>Download PDF</a>
           <button class="icon-btn" id="resumeClose" type="button">Close</button>
         </span>
       </div>
@@ -909,15 +1016,41 @@
     </div>
   </div>
 
-  <div class="term" id="term">
-    <p>saran@iia:~$ type help, play, theme, mute, exit</p>
-    <div id="termOut"></div>
-    <input id="termIn" autocomplete="off" />
+  <!-- Project Architecture & Quick Specs Modal -->
+  <div class="modal" id="projectModal" aria-hidden="true">
+    <div class="modal-card glass project-modal-card">
+      <div class="modal-head">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="badge" id="modalBadge">Case Study</span>
+          <strong id="modalTitle">Project Title</strong>
+        </div>
+        <button class="icon-btn" id="projectModalClose" type="button" aria-label="Close modal">✕</button>
+      </div>
+      <div class="project-modal-body" id="modalBody">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="modal-foot">
+        <a class="btn clay slim magnetic" id="modalRepoLink" href="#" target="_blank" rel="noopener">View GitHub Source</a>
+        <a class="btn ghost slim magnetic" id="modalDemoLink" href="#" target="_blank" rel="noopener" style="display:none">Launch Live Portal</a>
+        <button class="btn ghost slim magnetic" id="modalCloseBtn" type="button">Close Preview</button>
+      </div>
+    </div>
   </div>
 
+  <!-- Toast Notification Container -->
+  <div class="toast-notice" id="toastNotification" aria-live="polite"></div>
+
+  <!-- Hacker Terminal Modal -->
+  <div class="term" id="term">
+    <p>saran@iia-vbo:~$ type help, iia, stats, play, theme, mute, exit</p>
+    <div id="termOut"></div>
+    <input id="termIn" autocomplete="off" placeholder="type a command..." />
+  </div>
+
+  <!-- Interactive Mini-Game Modal -->
   <div class="game" id="game">
     <div>
-      <p style="text-align:center">Catch orbs · click to play · Esc to close</p>
+      <p style="text-align:center;margin-bottom:12px;color:var(--ink)">Catch the energy orbs · click to score · Esc to exit</p>
       <canvas id="gameCanvas" width="420" height="280"></canvas>
     </div>
   </div>

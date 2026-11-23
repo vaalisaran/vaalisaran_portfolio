@@ -28,7 +28,7 @@ function getAccentHex() {
 const coreGeo = new THREE.TorusKnotGeometry(1.1, 0.34, 180, 32, 2, 5);
 const coreMat = new THREE.MeshStandardMaterial({
   color: getAccentHex(),
-  metalness: 0.7,
+  metalness: 0.75,
   roughness: 0.15,
   emissive: 0x3b0764,
   emissiveIntensity: 0.45,
@@ -67,7 +67,7 @@ photoMesh.rotation.y = -Math.PI / 8;
 
 const frameBackGeo = new THREE.BoxGeometry(1.62, 1.92, 0.06);
 const frameBackMat = new THREE.MeshStandardMaterial({
-  color: 0x22d3ee,
+  color: getAccentHex(),
   metalness: 0.85,
   roughness: 0.15,
   emissive: 0x0284c7,
@@ -141,12 +141,12 @@ for (let i = 0; i < 5; i++) {
 }
 
 // 5. Spiral Cosmic Galaxy Particle Swarm
-const particleCount = 500;
+const particleCount = 550;
 const particlePositions = new Float32Array(particleCount * 3);
 const particleOriginals = new Float32Array(particleCount * 3);
 
 for (let i = 0; i < particleCount; i++) {
-  const radius = 1.5 + Math.random() * 5.5;
+  const radius = 1.5 + Math.random() * 5.8;
   const theta = Math.random() * Math.PI * 2;
   const phi = (Math.random() - 0.5) * 1.5;
 
@@ -176,7 +176,7 @@ const particles = new THREE.Points(particleGeo, particleMat);
 scene.add(particles);
 
 // 6. Lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
 scene.add(ambientLight);
 
 const light1 = new THREE.PointLight(0x22d3ee, 30, 30);
@@ -186,6 +186,27 @@ scene.add(light1);
 const light2 = new THREE.PointLight(0xf472b6, 25, 25);
 light2.position.set(-5, -4, 4);
 scene.add(light2);
+
+function updateThemeLighting() {
+  const isLight = document.documentElement.dataset.theme === "light";
+  if (isLight) {
+    ambientLight.intensity = 1.35;
+    light1.intensity = 22;
+    light2.intensity = 18;
+    particleMat.color.setHex(0x0284c7);
+    particleMat.blending = THREE.NormalBlending;
+    particleMat.opacity = 0.45;
+  } else {
+    ambientLight.intensity = 0.9;
+    light1.intensity = 30;
+    light2.intensity = 25;
+    particleMat.color.setHex(0xffffff);
+    particleMat.blending = THREE.AdditiveBlending;
+    particleMat.opacity = 0.65;
+  }
+}
+window.addEventListener("theme-change", updateThemeLighting);
+updateThemeLighting();
 
 window.addEventListener("accent-change", () => {
   const hex = getAccentHex();
@@ -251,7 +272,7 @@ canvas.addEventListener("dblclick", () => {
   scalePulse = 1.35;
 });
 
-// Window Resize Handling
+// Window Resize Handling with Dynamic Camera Auto-Zoom for Mobile Devices
 function onResize() {
   const parent = canvas.parentElement;
   if (!parent) return;
@@ -259,6 +280,13 @@ function onResize() {
   const height = parent.clientHeight;
   renderer.setSize(width, height, false);
   camera.aspect = width / height;
+
+  // Responsive camera zoom: pull back on narrow screens so torus knot & photo card never clip
+  if (camera.aspect < 1.0) {
+    camera.position.z = 7.5 / Math.max(camera.aspect * 1.12, 0.62);
+  } else {
+    camera.position.z = 7.5;
+  }
   camera.updateProjectionMatrix();
 }
 onResize();
@@ -269,6 +297,16 @@ let scrollOffset = 0;
 window.addEventListener("scroll", () => {
   scrollOffset = window.scrollY * 0.0008;
 }, { passive: true });
+
+// Gyroscope tilt on mobile devices
+if (window.DeviceOrientationEvent) {
+  window.addEventListener("deviceorientation", (e) => {
+    if (e.gamma !== null && e.beta !== null) {
+      rotationTarget.y += (e.gamma * 0.0002);
+      rotationTarget.x += (e.beta * 0.0002);
+    }
+  }, { passive: true });
+}
 
 // 8. Animation Render Loop
 function animate(time) {
